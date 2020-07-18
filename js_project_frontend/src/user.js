@@ -56,6 +56,13 @@ class User {
         Greeting.innerHTML = `<h1>Hey ${this.name}! What did you read this week?</h1>`
         div.appendChild(Greeting);
         body.appendChild(div);
+        this.books.forEach(function(book){
+            let newBook = new Book(book)
+            newBook.appendBook()
+        })
+    
+
+        Book.newBookForm(this.id)
     }
 
 }
