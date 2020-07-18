@@ -74,7 +74,22 @@ class Book {
         let p = document.createElement('p')
         p.setAttribute('data-id', this.id)
         p.innerHTML = `Title: ${this.title}</br>Author:${this.author}</br>Review:${this.review}</br>Rating:${this.rating}`
+        let deleteButton = `<button type="button" id="${this.id}">X</button>`
+        p.insertAdjacentHTML('beforeend', deleteButton)
         bc[0].appendChild(p)
+        let button = document.getElementById(`${this.id}`)
+        this.deleteBook(button)
+    }
+
+    //Delete a users book
+    deleteBook(button) {
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            fetch(`http://localhost:3000/api/v1/books/${e.target.parentNode.dataset.id}`, {
+                method: 'DELETE'
+            })
+            e.target.parentElement.remove();
+        })
     }
 
 }
